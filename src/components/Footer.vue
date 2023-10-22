@@ -4,9 +4,9 @@
     >
       <div>
         <a href="https://facebook.com/darulfaira" class="text-decoration-none text-white ml-n20"><v-icon icon="mdi-facebook" size="40"></v-icon></a>
-        <a href="https://facebook.com" class="text-decoration-none text-white"><v-icon icon="mdi-twitter" size="40"></v-icon></a>
+        <a href="https://twitter.com/darul_faida" class="text-decoration-none text-white"><v-icon icon="mdi-twitter" size="40"></v-icon></a>
         <a href="https://facebook.com" class="text-decoration-none text-white"><v-icon icon="mdi-youtube" size="40"></v-icon></a>
-        <a href="https://facebook.com" class="text-decoration-none text-white"><v-icon icon="mdi-instagram" size="40"></v-icon></a>
+        <a href="https://instagram.com/darulfaidha" class="text-decoration-none text-white"><v-icon icon="mdi-instagram" size="40"></v-icon></a>
       </div>
   
       <div class="pt-0">
