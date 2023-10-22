@@ -1,5 +1,11 @@
 <template>
-  <div class="wrapper" v-if="audio">
+	<div v-if="isLoading" align="center">
+		
+		<img src="./img//load-37.gif" />
+	</div>
+
+	<!-- content -->
+  <div class="wrapper" v-else>
 	<div class="links">
 		<ul>
 			<li data-view="list-view" class="li-list active">
@@ -24,25 +30,27 @@
 		</div>
 	</div>
 </div>
-<div v-else><p>Loading</p></div>
+
    
  </template>
  <script>
  import { db } from '@/components/firebase'
-import { collection, query, orderBy, onSnapshot, } from 'firebase/firestore'
+import { collection, query, orderBy, limit, onSnapshot, } from 'firebase/firestore'
 import { ref, onUnmounted } from 'vue';
 import moment from 'moment';
 
 
  export default{
  data: () => ({
+	isLoading: true,
 	uploadedDate: '',
   audio: ref([])
  }),
  mounted(){
-	const audioQuery = query(collection(db, 'files'), orderBy('uploadedDate'));
+	const audioQuery = query(collection(db, 'files'), orderBy("uploadedDate", 'desc'), limit(3));
 	const liveAudio = onSnapshot(audioQuery,(snapshot) => {
 		this.audio = snapshot.docs.map((doc) => {
+			this.isLoading = false;
 			const data = doc.data();
 			data.uploadedDate = moment(data.uploadedDate.toDate()).format('YYYY-MM-DD HH:mm:ss');
 			this.uploadedDate = data.uploadedDate;

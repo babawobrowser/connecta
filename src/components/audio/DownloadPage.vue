@@ -1,7 +1,9 @@
 <template>
-  <v-container fluid>
+  <!-- content -->
+  <span v-if="file">
+    <v-container fluid>
     <v-row align="center">
-      <v-col cols="12" v-if="file">
+      <v-col cols="12">
         <v-card>
           <v-card-title>Download File</v-card-title>
           <v-card-text>
@@ -19,9 +21,12 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <div v-else><p>Loading....</p></div>
     </v-row>
   </v-container>
+  </span>
+  <div v-else align="center">
+    <img src="./img//load-37.gif" style="width: 30%"/>
+  </div>
 </template>
 
 <script>
