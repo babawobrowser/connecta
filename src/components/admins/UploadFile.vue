@@ -4,7 +4,7 @@
         <!-- upload file  -->
         <v-file-input
             ref="fileInput"
-            accept="image/*"
+            accept="audio/*"
             label="Select file"></v-file-input>
             <!-- select category -->
         <v-select
@@ -25,11 +25,19 @@
       ></v-select>
       <!-- submit button -->
       <div class="d-flex flex-column">
-        <v-btn
+        <!-- <v-btn
           color="success"
           class="mt-4"
           block
-          @click="upload">Upload now</v-btn>
+          @click="upload">Upload now</v-btn> -->
+          <span v-if="isUploading" align="center">
+            <img src="./img/uploading.gif" style="width: 100px; height: 100;"/>
+          </span>
+          <span v-else> <v-btn
+          color="success"
+          class="mt-4"
+          block
+          @click="upload">Upload now</v-btn></span>
           </div>
           <br/>
         </v-form>
@@ -44,6 +52,7 @@ import { collection, addDoc, Timestamp, } from 'firebase/firestore'
     export default {
         methods: { 
        upload: function() {
+        this.isUploading = true;
         const filedata = (this.$refs.fileInput.files[0])
         const storageRef = ref(storage, 'audio/'+filedata.name);
         uploadBytes(storageRef, this.$refs.fileInput.files[0]).then((snapshot) => {
@@ -56,13 +65,16 @@ import { collection, addDoc, Timestamp, } from 'firebase/firestore'
                 folder: this.selectF,
                 DownloadID: e,
                 uploadedDate: Timestamp.now(),
-            })
+            });
+            this.isUploading = false;
+            this.$refs.form.reset();
             })
             
         })
        },
 },
 data: () => ({
+  isUploading: false,
     selectC: null,
     selectF: null,
       folder: [

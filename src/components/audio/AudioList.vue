@@ -3,7 +3,7 @@
 	<div class="links">
 		<ul>
 			<li data-view="list-view" class="li-list active">
-			Latest Audio Files 4</li>
+			Latest Audio Files</li>
 		</ul>
 	</div>
 	<div class="view_main">
@@ -28,7 +28,7 @@
    
  </template>
  <script>
- import { storage, db } from '@/components/firebase'
+ import { db } from '@/components/firebase'
 import { collection, query, orderBy, onSnapshot, } from 'firebase/firestore'
 import { ref, onUnmounted } from 'vue';
 import moment from 'moment';
