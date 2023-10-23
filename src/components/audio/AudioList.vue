@@ -1,9 +1,8 @@
 <template>
+	
 	<div v-if="isLoading" align="center">
-		
-		<img src="./img//load-37.gif" />
+	<img src="./img//load-37.gif" style="width: auto;">
 	</div>
-
 	<!-- content -->
   <div class="wrapper" v-else>
 	<div class="links">
@@ -23,32 +22,46 @@
 					<p class="content">{{ bytesToSize(audi.filesize ) }} - {{  uploadedDate }}</p>
 					<RouterLink :to="{ name: 'download', params: {id: audi.id }}" class="text-decoration-none text-white"><div class="btn">Download now</div></RouterLink>
 				</div>
-				
 			</div>
-			<v-pagination :length="4"></v-pagination>
-
+			<v-pagination
+    			v-model="page"
+    			:length="audio.length.toString"
+    			@click="paginate"></v-pagination>
 		</div>
 	</div>
 </div>
-
-   
  </template>
- <script>
- import { db } from '@/components/firebase'
-import { collection, query, orderBy, limit, onSnapshot, } from 'firebase/firestore'
-import { ref, onUnmounted } from 'vue';
-import moment from 'moment';
-
-
- export default{
- data: () => ({
-	isLoading: true,
-	uploadedDate: '',
-  audio: ref([])
- }),
- mounted(){
-	const audioQuery = query(collection(db, 'files'), orderBy("uploadedDate", 'desc'), limit(3));
-	const liveAudio = onSnapshot(audioQuery,(snapshot) => {
+  
+  <script>
+  import {  collection,
+  getDocs,
+  query,
+  orderBy,
+  limit,
+  onSnapshot,
+  startAfter, } from 'firebase/firestore';
+  import {  onUnmounted } from 'vue';
+  import { db } from '../firebase';
+  import moment from 'moment';
+  
+  export default {
+	name: 'Pagination',
+	data() {
+	  return {
+		total: 0,
+		paginas: 0,
+		limit: 2,
+		page: 1,
+		isLoading: true,
+		uploadedDate: '',
+		lastVisible: "",
+		firstVisible: "",
+		audio: [],
+	  };
+	},
+	mounted() {
+		const audioQuery = query(collection(db, 'files'), orderBy("uploadedDate", 'desc'), limit(this.limit));
+		const liveAudio = onSnapshot(audioQuery,(snapshot) => {
 		this.audio = snapshot.docs.map((doc) => {
 			this.isLoading = false;
 			const data = doc.data();
@@ -59,19 +72,56 @@ import moment from 'moment';
 				filename:doc.data().filename,
 				filesize:doc.data().filesize,
 				DownloadID: doc.data().DownloadID,
-				
 			}
 		});
 	});
 	onUnmounted(liveAudio)
-	
+	},
+	methods: {
+  async obtenerDatos() {
+  const q = await query(collection(db, "files"), orderBy("uploadedDate", 'desc'));
+  const documentSnapshots = await getDocs(q);
+  const totalDocumentos = documentSnapshots.docs.length;
+  this.total = totalDocumentos;
+  this.paginas = Math.ceil(this.total / this.limit);
+  const data = await query(
+    collection(db, "files"),
+    orderBy("uploadedDate", 'desc'),
+    limit(this.limit)
+  );
+  const querySnapshot = await getDocs(data);
+  querySnapshot.forEach((doc) => {
+    let obra = doc.data();
+    obra.id = doc.id;
+    this.audio.push(obra);
+  });
 },
-methods: {
-	bytesToSize: function (bytes, decimals = 2) {
+// pagination
+async paginate() {
+  const q = await query(collection(db, "files"), orderBy("uploadedDate", 'desc'));
+  const documentSnapshots = await getDocs(q);
+  const firstVisible = documentSnapshots.docs[this.limit * (this.page - 1) - 1] || null;
+  this.firstVisible = firstVisible;
+  const next = await query(
+    collection(db, "files"),
+    orderBy("uploadedDate", 'desc'),
+    limit(this.limit),
+    startAfter(this.firstVisible)
+  );
+  const querySnapshot = await getDocs(next);
+  	this.audio = [];
+  	querySnapshot.forEach((doc) => {
+    let obra = doc.data();
+    obra.id = doc.id;
+    this.audio.push(obra);
+  });
+},
+
+// file size converter function
+bytesToSize: function (bytes, decimals = 2) {
   if (!Number(bytes)) {
     return '0 Bytes';
   }
-
   const kbToBytes = 1024;
   const dm = decimals < 0 ? 0 : decimals;
   const sizes = [
@@ -91,13 +141,13 @@ methods: {
   return `${parseFloat(
     (bytes / Math.pow(kbToBytes, index)).toFixed(dm),
   )} ${sizes[index]}`;
-}
 },
-
+created(){
+	this.fecthFiles();
+}
   }
- </script>
- 
- 
+}
+  </script>
  <style>
  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&display=swap');
 
