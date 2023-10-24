@@ -47,7 +47,8 @@
 <script>
 import { storage, db } from '@/components/firebase'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { collection, addDoc, Timestamp, } from 'firebase/firestore'
+import { collection, addDoc, Timestamp,query, limit, onSnapshot, getDoc, getDocs } from 'firebase/firestore'
+import {  onUnmounted } from 'vue';
 
     export default {
         methods: { 
@@ -73,26 +74,24 @@ import { collection, addDoc, Timestamp, } from 'firebase/firestore'
         })
        },
 },
+mounted() {
+  // fetch categories from db
+		const collRef = collection(db, 'categories');
+    getDocs(collRef).then((snap) => {
+      this.cate = snap.docs.map((doc) => doc.data().name)
+    });
+    // fetch folder from db
+    const collRefs = collection(db, 'folders');
+    getDocs(collRefs).then((snap) => {
+      this.folder = snap.docs.map((doc) => doc.data().name)
+    })
+	},
 data: () => ({
   isUploading: false,
     selectC: null,
     selectF: null,
-      folder: [
-        'Tafsir',
-        'Lacture',
-        'Majalisi',
-      ],
-      cate: [
-        'Sheikh Dahiru Usman Bauchi',
-        'Sheikh Sharif Ibrahim Saleh',
-        'Prof. Ibrahim Maqari',
-        'Sheikh Sani Khalifa Zaria',
-        'Sheikh Salihu Sallau',
-        'Sheikh Umar Sani Fagge',
-        'Sheikh Ibrahim Mansur Kaduna',
-        'Sheikh Muhammad Sallah Kaduna',
-        'Sheikh Ubale Adakawa Kano'
-      ],
+      folder: [],
+      cate: [],
 })
 }
 </script>

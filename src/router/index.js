@@ -5,6 +5,7 @@ import Contact from '@/components/Contact.vue'
 import Policy from '@/components/Policy.vue'
 import DownloadPage from '@/components/audio/DownloadPage.vue'
 import Login from '@/components/admins/Login.vue'
+import SingleCate from '@/components/audio/categories/SingleCate.vue'
 
 const routes = [
   {
@@ -56,7 +57,12 @@ const routes = [
         component: Login,
         meta: {
           title: 'Darulfaida - Dashboard'
-        }
+        },
+      },
+      {
+        path: '/category/:id',
+        name: 'singlecate',
+        component: SingleCate
       }
     ],
   },
