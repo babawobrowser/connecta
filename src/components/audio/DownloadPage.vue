@@ -16,8 +16,8 @@
           
             <v-spacer></v-spacer>
             <v-btn @click="downloadFile" color="primary" dark block>
-              Download
-            </v-btn>  
+              Download Now
+            </v-btn> 
           </v-card-text>
         </v-card>
       </v-col>
@@ -45,7 +45,7 @@ export default {
   const fileId = this.$route.params.id;
   this.getFile(fileId)
  },
- methods: {
+ methods: {  
   async getFile(fileId){
     const fileRef = doc(db, 'files', fileId);
     try{

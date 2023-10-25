@@ -7,7 +7,7 @@
         <img src="./img/avatar.png"/>
         <h3>{{ category.name }}</h3>
         <p>{{ category.desc }}</p>
-        <RouterLink :to="{ name: 'singlecate', params: {id: category.id }}" class="btn">Open</RouterLink>
+        <RouterLink :to="{ name: 'singlecate', params: {id: category.name }}" class="btn">Open</RouterLink>
     </div>
 </div>
 

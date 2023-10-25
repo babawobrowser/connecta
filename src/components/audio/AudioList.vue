@@ -1,7 +1,6 @@
 <template>
-	
 	<div v-if="isLoading" align="center">
-	<img src="./img//load-37.gif" style="width: auto;">
+	<img src="./img//load-37.gif" style="width: 60%;">
 	</div>
 	<!-- content -->
   <div class="wrapper" v-else>
@@ -50,7 +49,7 @@
 	  return {
 		total: 0,
 		paginas: 0,
-		limit: 2,
+		limit: 10,
 		page: 1,
 		isLoading: true,
 		uploadedDate: '',
