@@ -42,8 +42,11 @@
   import {  onUnmounted } from 'vue';
   import { db } from '../firebase';
   import moment from 'moment';
+import titleMixin from '@/titleMixin';
   
   export default {
+	mixins: [titleMixin],
+	title: 'Darulfaida — Home',
 	name: 'Pagination',
 	data() {
 	  return {

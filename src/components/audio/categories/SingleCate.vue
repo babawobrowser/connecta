@@ -2,7 +2,9 @@
  
 	<!-- content -->
   <div class="wrapper">
+	
 	<div class="links">
+		<title>{{ this.$route.params.id }}</title>
 		<ul>
 			<li data-view="list-view" class="li-list active">{{ this.$route.params.id }}</li>
 		</ul>
@@ -20,6 +22,7 @@
 				<div class="vi_right">
 					<p class="title"> {{ file.filename }}</p>
 					<p class="content">{{ bytesToSize(file.filesize ) }} - {{  file.folder }}</p>
+				
 					<RouterLink :to="{ name: 'download', params: {id: file.id }}" class="text-decoration-none text-white"><div class="btn">Download now</div></RouterLink>
 				</div>
 			</div>
@@ -47,8 +50,13 @@ doc, } from 'firebase/firestore';
   import {  onUnmounted } from 'vue';
   import { db } from '@/components/firebase';
   import moment from 'moment';
+import titleMixin from '@/titleMixin';
+
 
     export default {
+		mixins: [titleMixin],
+
+		
         data() {
            return {
             isLoading: true,
@@ -56,20 +64,32 @@ doc, } from 'firebase/firestore';
            }
         },
         mounted(){
-            const q = query(collection(db, 'files'), limit(10), orderBy('uploadedDate', 'desc'), where('category', '==', this.$route.params.id));
-            const querySnap = getDocs(q);
-           querySnap.then((snap) => {
-            snap.docs.map((d) => {
-              this.isLoading = false
-                this.files.push(d.data())
-            });
-           }); 
-
+		const audioQuery = query(collection(db, 'files'), orderBy("uploadedDate", 'desc'), limit(10), where('category', '==', this.$route.params.id));
+		document.title = 'Darulfaida — ' + this.$route.params.id
+		const liveAudio = onSnapshot(audioQuery,(snapshot) => {
+		this.files = snapshot.docs.map((doc) => {
+			this.isLoading = false;
+			const data = doc.data();
+			data.uploadedDate = moment(data.uploadedDate.toDate()).format('YYYY-MM-DD HH:mm:ss');
+			this.uploadedDate = data.uploadedDate;
+			
+			return {
+				id: doc.id,
+				filename:doc.data().filename,
+				filesize:doc.data().filesize,
+				folder: doc.data().folder,
+				DownloadID: doc.data().DownloadID,
+			}
+		});
+	});
        
         },
         methods: {
+			tit(){
+				title: this.$route.params.id
+			},
           // file size converter function
-bytesToSize: function (bytes, decimals = 2) {
+	bytesToSize: function (bytes, decimals = 2) {
   if (!Number(bytes)) {
     return '0 Bytes';
   }
@@ -96,7 +116,7 @@ bytesToSize: function (bytes, decimals = 2) {
 created(){
 	this.fecthFiles();
 }
-        }
+        },
         }
     
 </script>

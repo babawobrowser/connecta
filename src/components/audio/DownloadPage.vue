@@ -33,9 +33,11 @@
 import { doc, getDoc, } from 'firebase/firestore';
 import { db } from '../firebase';
 import axios from 'axios';
+import titleMixin from '@/titleMixin';
 
 
 export default {
+  mixins: [titleMixin],
  data(){
   return {
     file: null,
@@ -46,12 +48,14 @@ export default {
   this.getFile(fileId)
  },
  methods: {  
+  
   async getFile(fileId){
     const fileRef = doc(db, 'files', fileId);
     try{
       const fileSnap = await getDoc(fileRef);
       if(fileSnap.exists()){
         this.file = fileSnap.data();
+        document.title = 'Darulfaida — ' + fileSnap.data().filename
       } else {
         console.log('file not found');
       }

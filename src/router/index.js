@@ -16,48 +16,32 @@ const routes = [
         path: '',
         name: 'Home',
         component: () => import('@/views/Home.vue'),
-       title: 'Darulfaida'
       },
       {
         path: '/about',
         name: 'about',
         component: About,
        title: 'About',
-       meta: {
-        title: 'Darulfaida - About'
-      }
       },
       {
         path: '/file/:id',
         name: 'download',
         component: DownloadPage,
-        meta: {
-          title: ''
-        }
       },
       {
         path: '/contact',
         name: 'contact',
         component: Contact,
-        meta: {
-          title: 'Darulfaida - Contact'
-        }
       },
       {
         path: '/policy',
         name: 'policy',
         component: Policy,
-        meta: {
-          title: 'Darulfaida - Policy'
-        }
       },
       {
         path: '/dashboard',
         name: 'dashboard',
         component: Login,
-        meta: {
-          title: 'Darulfaida - Dashboard'
-        },
       },
       {
         path: '/category/:id',

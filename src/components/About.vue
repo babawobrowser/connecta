@@ -67,8 +67,10 @@
 </template>
 
 <script>
+import titleMixin from '@/titleMixin'
     export default {
-        
+        mixins: [titleMixin],
+        title: 'Darulfaida — About'
     }
 </script>
 
