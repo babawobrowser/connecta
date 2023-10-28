@@ -13,11 +13,22 @@
               <p><strong>File Size:</strong> {{  bytesToSize(file.filesize) }}</p>
               <v-spacer></v-spacer>
             </div>
-          
-            <v-spacer></v-spacer>
+            <br/>
+            <div v-if="isDownloading"> 
+            <v-progress-linear
+              v-model="progres"
+              color="blue-grey"
+              height="25">
+            <template v-slot:default="{ value }">
+            <strong>{{ Math.ceil(value) }}%</strong>
+            </template>
+            </v-progress-linear>
+            </div>
+            <div v-else>
             <v-btn @click="downloadFile" color="primary" dark block>
               Download Now
             </v-btn> 
+            </div>
           </v-card-text>
         </v-card>
       </v-col>
@@ -40,6 +51,8 @@ export default {
   mixins: [titleMixin],
  data(){
   return {
+    isDownloading: false,
+    progres: 0,
     file: null,
   };
  },
@@ -66,27 +79,53 @@ export default {
   },
   // download function
   async downloadFile() {
-    try {
-  // Replace 'file-url' with the URL of the file in Firebase Storage.
-  const fileUrl = this.file.DownloadID;
+  try {
+    const fileUrl = this.file.DownloadID;
+    
+    const response = await fetch(fileUrl);
 
-  // Use Axios to make a GET request to download the file.
-  const response = await axios.get(fileUrl, {
-    responseType: 'blob',
-  });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
 
-  // Create a URL for the blob and a link to trigger the download.
-  const blob = new Blob([response.data]);
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = this.file.filename; // Set the desired download filename
-  a.click();
-  window.URL.revokeObjectURL(url);
-} catch (error) {
-  console.error('Error downloading file:', error);
-}
+    const contentDisposition = response.headers.get('content-disposition');
+    const filename = contentDisposition ? contentDisposition.split('filename=')[1] : this.file.filename;
+
+    // Get the total file size from the Content-Length header.
+    const contentLength = parseInt(response.headers.get('content-length') || '0', 10);
+    let downloadedSize = 0;
+
+    const reader = response.body.getReader();
+
+    const blobChunks = [];
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      downloadedSize += value.length;
+      blobChunks.push(value);
+
+      // Calculate and display the download progress here.
+      const progress = (downloadedSize / contentLength) * 100;
+      this.isDownloading = true;
+      this.progres = progress.toFixed(2);
+    }
+
+    // Create a blob from the downloaded chunks.
+    const blob = new Blob(blobChunks);
+
+    // Create a URL for the blob and a link to trigger the download.
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error('Error downloading file:', error);
+  }
 },
+
   
 
 // file size
