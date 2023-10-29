@@ -6,10 +6,11 @@
       <v-col cols="12">
         <v-card>
           <v-card-title>Download File</v-card-title>
+          <br/>
           <v-card-text>
             <div>
               <p><strong>File Name:</strong> {{ file.filename }}</p>
-              <v-spacer></v-spacer>
+              <br/>
               <p><strong>File Size:</strong> {{  bytesToSize(file.filesize) }}</p>
               <v-spacer></v-spacer>
             </div>
@@ -30,6 +31,9 @@
             </v-btn> 
             </div>
           </v-card-text>
+          <!-- ShareThis BEGIN -->
+        <div class="sharethis-inline-share-buttons"></div>
+        <!-- ShareThis END -->
         </v-card>
       </v-col>
     </v-row>
