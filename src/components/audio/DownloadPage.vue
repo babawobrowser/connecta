@@ -42,6 +42,7 @@
   <div v-else align="center">
     <img src="./img//load-37.gif" style="width: 30%"/>
   </div>
+  <div class="shareaholic-canvas" data-app="recommendations" data-app-id="30570920"></div>
 </template>
 
 <script>
