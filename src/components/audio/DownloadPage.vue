@@ -12,7 +12,8 @@
               <p><strong>File Name:</strong> {{ file.filename }}</p>
               <br/>
               <p><strong>File Size:</strong> {{  bytesToSize(file.filesize) }}</p>
-              <v-spacer></v-spacer>
+              <br/>
+              <p><strong>Category: </strong><RouterLink  :to="{ name: 'singlecate', params: {id: file.category }}" class="text-decoration-none">{{ file.category }}</RouterLink></p>
             </div>
             <br/>
             <div v-if="isDownloading"> 
@@ -48,6 +49,7 @@
     </div>
   </v-container>
   <br/>
+  <RelatedFiles :file-i-d="this.$route.params.id"></RelatedFiles>
   </span>
   <div v-else align="center">
     <img src="./img//load-37.gif" style="width: 30%"/>
@@ -60,7 +62,7 @@ import { doc, getDoc, } from 'firebase/firestore';
 import { db } from '../firebase';
 import axios from 'axios';
 import titleMixin from '@/titleMixin';
-
+import RelatedFiles from './RelatedFiles.vue';
 
 export default {
   mixins: [titleMixin],
@@ -173,7 +175,10 @@ export default {
   return `${parseFloat(
     (bytes / Math.pow(kbToBytes, index)).toFixed(dm),
   )} ${sizes[index]}`;
-}}
+}},
+components: {
+  RelatedFiles,
+}
 }
 </script>
 
