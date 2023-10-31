@@ -12,7 +12,6 @@
 </div>
 
 </div>
-<div class="shareaholic-canvas" data-app="recommendations" data-app-id="30570920"></div>
 </template>
 
 <script>

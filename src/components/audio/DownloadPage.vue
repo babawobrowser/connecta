@@ -32,17 +32,17 @@
             </div>
           </v-card-text>
           <!-- ShareThis BEGIN -->
-        <div class="sharethis-inline-share-buttons"></div>
+        <!-- <div class="sharethis-inline-share-buttons"></div> -->
         <!-- ShareThis END -->
         </v-card>
       </v-col>
     </v-row>
+    <div class="shareaholic-canvas" data-app="share_buttons" data-app-id="33153458"></div>
   </v-container>
   </span>
   <div v-else align="center">
     <img src="./img//load-37.gif" style="width: 30%"/>
   </div>
-  <div class="shareaholic-canvas" data-app="recommendations" data-app-id="30570920"></div>
 </template>
 
 <script>
