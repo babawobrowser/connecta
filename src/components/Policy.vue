@@ -1,74 +1,104 @@
 <template>
    <v-card class="max-auto">
     <v-card-text>
-        <h3>Policy</h3>
-        <div class="text--primary">
-            <p>This policy outlines the terms and conditions for downloading Islamic content from our website.</p>
+<h1>Policy & Terms of Service</h1>
 <br/>
-
-<p><b>Permitted Uses</b></p>
+<p>Privacy Policy</p>
 <br/>
-
-<p>You are prohibited from downloading Islamic content from our website for commercial use. This includes using the content in advertisements, selling the content, or using the content to create products or services that are sold.</p>
+<h3>Effective Date: 2023-10-25</h3>
 <br/>
-
-<p>You are also prohibited from downloading Islamic content from our website and redistributing it on other websites or file-sharing services.</p>
+<p>This Privacy Policy explains how we collect, use, and disclose your personal information when you use our website or services to access or download Islamic audio files.</p>
 <br/>
-
-<p><b>Copyright</b></p>
+<h2>What information do we collect?</h2>
 <br/>
-
-<p>All of the Islamic content on our website is protected by copyright. You are not permitted to modify, copy, or distribute the content without our permission.</p>
+<p>We collect the following information from you:</p>
 <br/>
-
-<p><b>Safety Guidelines</b></p>
+<p>Information you provide to us directly, such as your name, email address, and any other information you include in your communications with us.
+Information we collect automatically when you use our website or services, such as your IP address, browser type, and device type.
+Information we collect from third-party sources, such as social media platforms and analytics providers.
+How do we use your information?</p>
 <br/>
-
-<p>We are committed to providing a safe and welcoming environment for all of our users. We have a number of safety guidelines in place to protect our users from harmful, unethical, and offensive content.</p>
+<p>We use your information for the following purposes:</p>
 <br/>
-
-<p>Our safety guidelines include:</p>
+<p>To provide you with access to our website and services.
+To communicate with you about our website and services.
+To personalize your experience on our website and services.
+To improve our website and services.
+To market our website and services to you.
+To comply with legal requirements.
+How do we disclose your information?</p>
 <br/>
-
-<ul>
-<li>No hateful content, including racism, sexism, and homophobia.</li>
-<li>No violence or threats of violence.</li>
-<li>No sexually suggestive content.</li>
-<li>No private information about individuals.</li>
-</ul><br/>
-
-<p>If you see any content on our website that violates our safety guidelines, please report it to us immediately.</p>
+<h2>We may disclose your information to the following parties:</h2>
 <br/>
-
-<p><b>Enforcement</b></p>
-
-<p>We reserve the right to suspend or terminate your access to our website if you violate this policy.</p>
+<p>Third-party service providers who help us to operate our website and services.
+Law enforcement agencies or other government entities, if required by law.
+Security</p>
 <br/>
-
-<p><b>Contact Us</b></p><br/>
-
-<p>If you have any questions about this policy, please contact us at Darulfaida@gmail.com</p>
+<p>We take reasonable measures to protect your information from unauthorized access, disclosure, alteration, and destruction. However, no security measure is perfect, and we cannot guarantee that your information will never be accessed, disclosed, altered, or destroyed.</p>
 <br/>
-
-<p><b>Creative Response</b></p>
+<h2>Your choices</h2>
 <br/>
-
-<p>We are excited to offer our users a wide variety of Islamic content. We hope that you will find the content you are looking for on our website.</p>
+<h2>You have the following choices regarding your information:</h2>
 <br/>
-
-<p>Here are some ideas for how to use the content on our website:</p>
+<p>You can opt out of receiving marketing communications from us by clicking on the unsubscribe link in any marketing email we send you.
+You can request access to your information or request that we delete your information by contacting us at <a href="@darulfaida@gmail.com">darulfaida@gmail.com</a>
+Changes to this Privacy Policy</p>
 <br/>
-
-<ul>
-<li>Listen to Quran recitations while you are commuting, working out, or relaxing.</li>
-<li>Listen to lectures and sermons to learn more about Islam.</li>
-<li>Share the content with your friends and family to help them learn more about Islam.</li>
-<li>Use the content to create your own Islamic playlists.</li>
-</ul><br/>
-
-<p>We believe that Islamic content can be a powerful tool for learning, growth, and inspiration. We hope that you will use the content on our website to enrich your life and the lives of those around you.</p>
+<p>We may update this Privacy Policy from time to time. If we make any material changes to this Privacy Policy, we will notify you by posting the updated Privacy Policy on our website or by sending you an email notification.</p>
 <br/>
-        </div>
+<h1>Terms of Service</h1>
+<br/>
+<h3>Effective Date: 2023-10-25</h3>
+<br/>
+<p>These Terms of Service govern your use of our website and services to access or download Islamic audio files. By using our website or services, you agree to be bound by these Terms of Service.</p>
+<br/>
+<h2>Permitted use</h2>
+<br/>
+<p>You may use our website and services to access or download Islamic audio files for your personal, non-commercial use only. You may not use our website or services to distribute, reproduce, or transmit any of the Islamic audio files for any commercial purpose.</p>
+<br/>
+<h2>Prohibited use</h2>
+<br/>
+<p>You may not use our website or services to:</p>
+<br/>
+<p>Engage in any unlawful activity.
+Access or download any Islamic audio files for commercial purposes.
+Distribute, reproduce, or transmit any of the Islamic audio files for commercial purposes.
+Modify or alter any of the Islamic audio files.
+Remove any copyright notices or other proprietary markings from any of the Islamic audio files.
+Termination</p>
+<br/>
+<h2>We may terminate your access to our website and services at any time, for any reason, without notice.</h2>
+<br/>
+<h2>Indemnification</h2>
+<br/>
+<h3>You agree to indemnify and hold us harmless from any claims, losses, damages, and expenses (including reasonable attorneys' fees) arising out of or related to your use of our website or services.</h3>
+<br/>
+<h1>Governing law</h1>
+<br/>
+<p>These Terms of Service shall be governed by and construed in accordance with the laws of the State of California, without regard to its conflict of law provisions.</p>
+<br/>
+<h1>Entire agreement</h1>
+<br/>
+<h4>These Terms of Service constitute the entire agreement between you and us with respect to your use of our website and services.</h4>
+<br/>
+<h2>Severability</h2>
+<br/>
+<p>If any provision of these Terms of Service is held to be invalid or unenforceable, such provision shall be struck from these Terms of Service and the remaining provisions shall remain in full force and effect.</p>
+<br/>
+<p>No waiver</p>
+<br/>
+<p>No waiver of any provision of these Terms of Service shall be effective unless in writing and signed by both parties.</p>
+<br/>
+<h1>Notices</h1>
+<br/>
+<p>All notices and other communications under these Terms of Service shall be in writing and shall be deemed to have been duly given when delivered in person, upon the first business day following deposit in the United States mail, postage prepaid, certified or registered, return receipt requested, addressed as follows:</p>
+<br/>
+<p>If to you:</p>
+<br/>
+<b>Darulfaida</b>
+<br/>
+If to us:
+
     </v-card-text>
    </v-card>
 </template>

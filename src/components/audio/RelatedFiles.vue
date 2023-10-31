@@ -2,7 +2,7 @@
    
    <!-- content -->
   <div class="wrapper">
-    <h2>You may also like this</h2>
+    <h2 class="text-grey ml-3">You may also like this</h2>
 		<div class="view_wrap list-view" style="display: block;" >
 			<div class="view_item" v-for="file in relatedFiles">
 				<div class="vi_left" >
