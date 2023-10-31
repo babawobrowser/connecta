@@ -43,8 +43,7 @@
         :hashtags="hashtags"
         
       >
-      <i class="mdi-facebook"></i>
-      <span>Share on Twitter</span>
+      <v-icon icon="mdi-facebook" size="40"></v-icon>
     </ShareNetwork>
     </div>
   </v-container>
