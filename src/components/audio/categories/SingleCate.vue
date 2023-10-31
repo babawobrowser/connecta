@@ -28,7 +28,7 @@
 			</div>
 			<v-pagination
     			v-model="page"
-    			:length="4"
+    			:length="files.length.toString"
     			@click="paginate"></v-pagination>
 		</div>
 	</div>
@@ -59,6 +59,12 @@ import titleMixin from '@/titleMixin';
 		
         data() {
            return {
+			total: 0,
+			paginas: 0,
+			limit: 10,
+			page: 1,
+			lastVisible: "",
+			firstVisible: "",
             isLoading: true,
             files: [],
            }
@@ -68,7 +74,7 @@ import titleMixin from '@/titleMixin';
 		document.title = 'Darulfaida — ' + this.$route.params.id
 		const liveAudio = onSnapshot(audioQuery,(snapshot) => {
 		this.files = snapshot.docs.map((doc) => {
-			this.isLoading = false;
+			this.isLoading = false; 
 			const data = doc.data();
 			data.uploadedDate = moment(data.uploadedDate.toDate()).format('YYYY-MM-DD HH:mm:ss');
 			this.uploadedDate = data.uploadedDate;
@@ -85,9 +91,45 @@ import titleMixin from '@/titleMixin';
        
         },
         methods: {
-			tit(){
-				title: this.$route.params.id
-			},
+			async obtenerDatos() {
+  const q = await query(collection(db, "files"), orderBy("uploadedDate", 'desc'), where('category', '==', this.$route.params.id));
+  const documentSnapshots = await getDocs(q);
+  const totalDocumentos = documentSnapshots.docs.length;
+  this.total = totalDocumentos;
+  this.paginas = Math.ceil(this.total / this.limit);
+  const data = await query(
+    collection(db, "files"),
+    orderBy("uploadedDate", 'desc'),
+    limit(this.limit)
+  );
+  const querySnapshot = await getDocs(data);
+  querySnapshot.forEach((doc) => {
+    let obra = doc.data();
+    obra.id = doc.id;
+    this.files.push(obra);
+  });
+},
+// pagination
+async paginate() {
+  const q = await query(collection(db, "files"), orderBy("uploadedDate", 'desc'), where('category', '==', this.$route.params.id));
+  const documentSnapshots = await getDocs(q);
+  const firstVisible = documentSnapshots.docs[this.limit * (this.page - 1) - 1] || null;
+  this.firstVisible = firstVisible;
+  const next = await query(
+    collection(db, "files"),
+    orderBy("uploadedDate", 'desc'),
+    limit(this.limit),
+	where('category', '==', this.$route.params.id),
+    startAfter(this.firstVisible)
+  );
+  const querySnapshot = await getDocs(next);
+  	this.files = [];
+  	querySnapshot.forEach((doc) => {
+    let obra = doc.data();
+    obra.id = doc.id;
+    this.files.push(obra);
+  });
+},
           // file size converter function
 	bytesToSize: function (bytes, decimals = 2) {
   if (!Number(bytes)) {
