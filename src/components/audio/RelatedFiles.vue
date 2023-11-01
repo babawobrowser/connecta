@@ -8,7 +8,7 @@
 				<div class="vi_left" >
 				<img src="./img/play_music_audio.png" alt="Loading">
 				</div>
-                <RouterLink  :to="{ name: 'download', params: {id: file.id }}" class="text-decoration-none">
+                <RouterLink  :to="{ name: 'download', params: {id: file.filename }}" class="text-decoration-none">
 				<div class="vi_right">
 					<p class="title"> {{ file.filename }}</p>
 					<p class="content">{{  file.folder }}</p>
@@ -39,12 +39,24 @@ import { db } from '../firebase';
             });
             this.relatedFiles = relatedFiles;
         })
+        // const audioQuery = getDocs(query(collection(db, 'files'), orderBy("uploadedDate", 'desc'), limit(5)));
+		// audioQuery.then((docs) => {
+        //     docs.forEach((doc) => {
+        //         console.log(doc.data());
+        //     })
+        // })
 	},
     data(){
         return {
             relatedFiles: [],
         }
+    },
+    methods: {
+    reloadPage() {
+      // Reload the page
+      location.reload();
     }
+}
     }
 </script>
 
